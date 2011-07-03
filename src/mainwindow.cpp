@@ -10,6 +10,8 @@
 MainWindow::MainWindow(QWidget *parent) :
     QDeclarativeView(parent)
 {
+    m_lastOpen = -1;
+    m_moves = 0;
     setResizeMode(SizeRootObjectToView);
 
     p_imageProvider = new ImageProvider;
@@ -24,8 +26,37 @@ MainWindow::MainWindow(QWidget *parent) :
 void MainWindow::click(int index)
 {
     qDebug() << QString::number(index);
-    // TODO: increase click count, check if card accepts click
-    // TODO: make the card flip
-    // TODO: did a pair open?
-    // TODO: did the player win the game
+
+    if(m_lastOpen != index || m_solvedList.contains(index)) {
+        // invalid selection
+        // TODO: control UI
+    }
+
+    m_moves++;
+    // TODO: update move count in UI
+
+    if(m_lastOpen == -1) {
+        // first of pair
+        // TODO: control UI
+    }
+    else {
+        // one already open
+        if(p_imageProvider->cardColors().at(index) == p_imageProvider->cardColors().at(m_lastOpen)) {
+            m_solvedList.append(index);
+            m_solvedList.append(m_lastOpen);
+
+            if(m_solvedList.count() == 32) {
+                //game won
+            }
+
+            m_lastOpen = -1;
+
+            // TODO: control UI
+        }
+        else {
+            m_lastOpen = -1;
+
+            // TODO: control UI
+        }
+    }
 }

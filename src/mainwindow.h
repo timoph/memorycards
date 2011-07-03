@@ -20,6 +20,9 @@ public slots:
 
 private:
     ImageProvider *p_imageProvider;
+    QList<int> m_solvedList;
+    int m_lastOpen;
+    int m_moves;
 
 };
 
