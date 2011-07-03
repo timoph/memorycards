@@ -7,15 +7,17 @@ Rectangle {
     color: "green"
 
     Image {
-        id: cardBackSide
+        id: cardImage
         anchors.fill: parent
-        source: "image://pics/" + index
+        source: state == "flipped" ? "image://pics/" + index : "image://pics/99"
     }
 
     MouseArea {
+        id: clickpad
         anchors.fill: parent
         onClicked: {
             gameView.click(index)
+            cardImage.state = "flipped"
         }
     }
 }

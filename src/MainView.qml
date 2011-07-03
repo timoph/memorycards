@@ -5,39 +5,95 @@ Rectangle {
     width: 800
     height: 480
 
-    Grid {
-        columns: 9
-        spacing: 10
-        anchors.topMargin: 10
-        anchors.leftMargin: 10
-        anchors.fill: parent
+    Rectangle {
+        id: cardRect
+        width: 650
+        height: 450
+        color: "lightBlue"
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: (background.height - height) / 2
 
-        Repeater {
-            model: 4 * 9
-            Card { }
+        Grid {
+            id: cardGrid
+            columns: 8
+            spacing: 10
+            anchors.topMargin: 10
+            anchors.leftMargin: 10
+            anchors.fill: parent
+
+            Repeater {
+                model: 4 * cardGrid.columns
+                Card { }
+            }
         }
     }
 
-    // TODO: column with real time stats and restart and quit buttons, etc.
-
-    // ** Close button ** //
-    Rectangle {
-        id: closeButton
-        width: 30
-        height: 30
-        anchors.right: parent.right
+    Column {
+        id: actionColumn
+        width: parent.width - cardRect.width - 20
+        height: parent.height
         anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 10
         anchors.topMargin: 10
         anchors.rightMargin: 10
-        color: "red"
+        spacing: 10
 
-        //TODO: image
 
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                Qt.quit()
+        Rectangle {
+            id: movesRect
+            width: parent.width
+            height: 60
+            color: "red"
+
+            Text {
+                id: countText
+                anchors.centerIn: parent
+                property int moves: 0
+                text: "Moves:\n " + moves
             }
         }
+
+        Rectangle {
+            id: fillerRect
+            width: parent.width
+            height: 60 * 4
+        }
+
+        // ** Restart button **//
+        Rectangle {
+            id: restartButton
+            width: parent.width
+            height: 60
+            color: "red"
+
+            // TODO: image
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    console.log("restart clicked")
+                }
+            }
+        }
+
+        // ** Close button ** //
+        Rectangle {
+            id: closeButton
+            width: parent.width
+            height: 60
+            color: "red"
+
+            //TODO: image
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    Qt.quit()
+                }
+            }
+        }
+
     }
 }
