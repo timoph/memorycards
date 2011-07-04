@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     m_lastOpen = -1;
     m_moves = 0;
+    m_firstMove = true;
     setResizeMode(SizeRootObjectToView);
 
     p_imageProvider = new ImageProvider;
@@ -27,16 +28,20 @@ void MainWindow::click(int index)
 {
     qDebug() << QString::number(index);
 
-    if(m_lastOpen != index || m_solvedList.contains(index)) {
+    if(!m_firstMove && (m_lastOpen == index || m_solvedList.contains(index))) {
         // invalid selection
         // TODO: control UI
+        return;
     }
 
-    m_moves++;
+    if(m_firstMove) m_firstMove = false;
+
+    setMoves(m_moves + 1);
     // TODO: update move count in UI
 
     if(m_lastOpen == -1) {
         // first of pair
+        m_lastOpen = index;
         // TODO: control UI
     }
     else {
@@ -59,4 +64,16 @@ void MainWindow::click(int index)
             // TODO: control UI
         }
     }
+}
+
+int MainWindow::moves() const
+{
+    return m_moves;
+}
+
+void MainWindow::setMoves(int moves)
+{
+    if(moves == m_moves) return;
+
+    m_moves = moves; emit movesChanged();
 }

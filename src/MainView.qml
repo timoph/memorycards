@@ -51,7 +51,7 @@ Rectangle {
                 id: countText
                 anchors.centerIn: parent
                 property int moves: 0
-                text: "Moves:\n " + moves
+                text: "Moves:\n " + gameView.moves
             }
         }
 
