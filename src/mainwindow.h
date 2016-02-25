@@ -1,18 +1,30 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#ifdef QT5BUILD
+#include <QQuickView>
+#else
 #include <QDeclarativeView>
+#endif
 
 class ImageProvider;
 
+#ifdef QT5BUILD
+class MainWindow : public QQuickView
+#else
 class MainWindow : public QDeclarativeView
+#endif
 {
     Q_OBJECT
     Q_PROPERTY(int moves READ moves WRITE setMoves NOTIFY movesChanged);
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    int moves() const;
+#ifdef QT5BUILD
+    explicit MainWindow(QWindow *parent = 0);
+#else
+	explicit MainWindow(QWidget *parent = 0);
+#endif
+	int moves() const;
     void setMoves(int moves);
 
 

@@ -1,7 +1,11 @@
 #include "imageprovider.h"
 
 ImageProvider::ImageProvider() :
-    QDeclarativeImageProvider(QDeclarativeImageProvider::Pixmap)
+#ifdef QT5BUILD
+	QQuickImageProvider(QQuickImageProvider::Pixmap)
+#else
+	QDeclarativeImageProvider(QDeclarativeImageProvider::Pixmap)
+#endif
 {
     // fill colors in pairs
     for(int i = 0; i < 16; i++) {
