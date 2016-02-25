@@ -3,7 +3,14 @@ TARGET = memorycards
 DEPENDPATH += .
 INCLUDEPATH += .
 
-QT += declarative
+greaterThan(QT_MAJOR_VERSION, 4) {
+	QT += core quick widgets
+	CONFIG -= app_bundle
+	DEFINES += QT5BUILD
+}
+else {
+	QT += declarative
+}
 
 # Input
 SOURCES += main.cpp \

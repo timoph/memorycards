@@ -2,13 +2,24 @@
 #include "imageprovider.h"
 
 #include <QApplication>
+
+#ifdef QT5BUILD
+#include <QQmlEngine>
+#include <QQmlContext>
+#else
 #include <QDeclarativeEngine>
 #include <QDeclarativeContext>
+#endif
 
 #include <QDebug>
 
+#ifdef QT5BUILD
+MainWindow::MainWindow(QWindow *parent) :
+    QQuickView(parent)
+#else
 MainWindow::MainWindow(QWidget *parent) :
     QDeclarativeView(parent)
+#endif
 {
     m_lastOpen = -1;
     m_moves = 0;
