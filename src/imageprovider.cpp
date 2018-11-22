@@ -1,8 +1,6 @@
 #include "imageprovider.h"
 #include "gameengine.h"
 
-#include <QDebug>
-
 ImageProvider::ImageProvider() :
 #ifdef QT5BUILD
 	QQuickImageProvider(QQuickImageProvider::Pixmap)
@@ -27,8 +25,6 @@ QPixmap ImageProvider::requestPixmap(const QString &id, QSize *size, const QSize
     }
     else {
         QString colorName = GameEngine::instance()->cardList().at(id.toInt());
-        //pixmap.fill(QColor(colorName));
-        qDebug() << QString("://pics/%1.png").arg(colorName);
         pixmap.load(QString("://pics/%1.png").arg(colorName));
     } 
 

@@ -3,8 +3,6 @@
 #include <QColor>
 #include <QTimer>
 
-#include <QDebug>
-
 GameEngine *GameEngine::m_instance = 0;
 
 GameEngine *GameEngine::instance()
@@ -136,7 +134,6 @@ void GameEngine::click(int index)
 
             if(m_solvedList.count() == m_cardCount) {
                 //game won
-                qDebug() << "Game won";
                 emit gameWon();
             }
 
