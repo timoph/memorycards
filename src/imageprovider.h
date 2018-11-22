@@ -16,10 +16,10 @@ class ImageProvider : public QDeclarativeImageProvider
 public:
     ImageProvider();
     QPixmap requestPixmap(const QString &id, QSize *size, const QSize &requestedSize);
-    QList<QColor> cardColors() const;
+    QList<QString> cardColors() const;
 
-private:
-    QList<QColor> m_list;
+public slots:
+
 };
 
 #endif // IMAGEPROVIDER_H

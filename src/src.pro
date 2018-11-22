@@ -15,7 +15,8 @@ else {
 # Input
 SOURCES += main.cpp \
     mainwindow.cpp \
-    imageprovider.cpp
+    imageprovider.cpp \
+    gameengine.cpp
 
 OTHER_FILES += \
     MainView.qml \
@@ -23,7 +24,8 @@ OTHER_FILES += \
 
 HEADERS += \
     mainwindow.h \
-    imageprovider.h
+    imageprovider.h \
+    gameengine.h
 
 RESOURCES += \
     resources.qrc
