@@ -1,11 +1,13 @@
 import QtQuick 2.9
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.2
+import QtQuick.Window 2.3
 
-Rectangle {
+Window {
     id: background
     width: 450
     height: 480
     color: "#333"
+    visible: true
 
     Rectangle {
         id: cardRect
