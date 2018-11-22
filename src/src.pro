@@ -14,7 +14,6 @@ else {
 
 # Input
 SOURCES += main.cpp \
-    mainwindow.cpp \
     imageprovider.cpp \
     gameengine.cpp
 
@@ -23,7 +22,6 @@ OTHER_FILES += \
     Card.qml
 
 HEADERS += \
-    mainwindow.h \
     imageprovider.h \
     gameengine.h
 
