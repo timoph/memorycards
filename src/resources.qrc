@@ -2,5 +2,14 @@
     <qresource prefix="/">
         <file>Card.qml</file>
         <file>MainView.qml</file>
+        <file>pics/back.png</file>
+        <file>pics/black.png</file>
+        <file>pics/blue.png</file>
+        <file>pics/green.png</file>
+        <file>pics/magenta.png</file>
+        <file>pics/pink.png</file>
+        <file>pics/purple.png</file>
+        <file>pics/red.png</file>
+        <file>pics/yellow.png</file>
     </qresource>
 </RCC>

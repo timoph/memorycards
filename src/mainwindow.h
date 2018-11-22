@@ -16,7 +16,6 @@ class MainWindow : public QDeclarativeView
 #endif
 {
     Q_OBJECT
-    Q_PROPERTY(int moves READ moves WRITE setMoves NOTIFY movesChanged);
 
 public:
 #ifdef QT5BUILD
@@ -24,22 +23,13 @@ public:
 #else
 	explicit MainWindow(QWidget *parent = 0);
 #endif
-	int moves() const;
-    void setMoves(int moves);
 
 
 public slots:
-    void click(int index);
-
-signals:
-    void movesChanged();
+    void resetGame();
 
 private:
     ImageProvider *p_imageProvider;
-    QList<int> m_solvedList;
-    int m_lastOpen;
-    int m_moves;
-    bool m_firstMove;
 
 };
 
