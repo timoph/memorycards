@@ -9,17 +9,20 @@
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc,argv);
+    app.setOrganizationName("timoph");
+    app.setOrganizationDomain("timoph.fi");
+    app.setApplicationName("MemoryCards");
     qsrand(QDateTime::currentDateTime().toSecsSinceEpoch());
 
     GameEngine::instance()->setupGameboard();
 
-    QQmlApplicationEngine *view = new QQmlApplicationEngine(GameEngine::instance());
+    QQmlApplicationEngine engine;
 
     QScopedPointer<ImageProvider> imageProvider(new ImageProvider);
-    view->addImageProvider("pics", imageProvider.data());
-    view->rootContext()->setContextProperty("engine", GameEngine::instance());
+    engine.addImageProvider("pics", imageProvider.data());
+    engine.rootContext()->setContextProperty("engine", GameEngine::instance());
 
-    view->load(QUrl("qrc:/MainView.qml"));
+    engine.load(QUrl("qrc:/qml/MainView.qml"));
 
     return app.exec();
 }

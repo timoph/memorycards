@@ -1,10 +1,10 @@
 import QtQuick 2.3
 
-Rectangle {
+Item {
     id: card
-    width: 70
-    height: 100
-    color: "green"
+    implicitWidth: 80
+    implicitHeight: 100
+    //color: "green"
 
     function setState(stateName) {
         cardImage.state = stateName
