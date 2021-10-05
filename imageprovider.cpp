@@ -25,8 +25,12 @@ QPixmap ImageProvider::requestPixmap(const QString &id, QSize *size, const QSize
     }
     else {
         QString colorName = GameEngine::instance()->cardList().at(id.toInt());
-        //pixmap.load(QString("://pics/%1.png").arg(colorName));
-        pixmap.fill(QColor(colorName));
+        if(GameEngine::instance()->usePictures()) {
+            pixmap.load(QString("://pics/%1.png").arg(colorName));
+        }
+        else {
+            pixmap.fill(QColor(colorName));
+        }
     } 
     return pixmap;
 }

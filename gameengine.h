@@ -11,6 +11,7 @@ class GameEngine : public QObject
     Q_PROPERTY(int moves READ moves WRITE setMoves NOTIFY movesChanged)
     Q_PROPERTY(bool waiting READ waiting NOTIFY waitingChanged)
     Q_PROPERTY(bool gameReady READ gameReady WRITE setGameReady NOTIFY gameReadyChanged)
+    Q_PROPERTY(bool usePictures READ usePictures WRITE setUsePictures NOTIFY usePicturesChanged)
 
 public:
     static GameEngine *instance();
@@ -20,6 +21,7 @@ public:
     void setMoves(int moves);
     bool waiting() const;
     bool gameReady() const;
+    bool usePictures() const;
 
 signals:
     void movesChanged();
@@ -28,11 +30,13 @@ signals:
     void newGame();
     void gameWon();
     void gameReadyChanged();
+    void usePicturesChanged();
 
 public slots:
     Q_INVOKABLE void setupGameboard();
     void click(int index);
     void setGameReady(bool isReady);
+    void setUsePictures(bool usePics);
     void unflipCardsWithDelay();
 
     QList<QString> cardList() const;
@@ -55,6 +59,7 @@ private:
     bool m_waiting;
 
     bool m_gameReady;
+    bool m_usePictures;
 };
 
 #endif // GAMEENGINE_H

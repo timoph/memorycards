@@ -3,8 +3,8 @@ import QtQuick.Controls 2.0
 
 Item {
     id: rootItem
-    implicitWidth: parent.width / 2 > 200 ? parent.width / 2 : 200
-    implicitHeight: parent.height / 2 > 240 ? parent.height / 2 : 240
+    implicitWidth: 200
+    implicitHeight: 240
     visible: false
     anchors.centerIn: parent
 
@@ -25,15 +25,30 @@ Item {
             text: "Memory cards"
         }
 
-        MenuButton {
-            id: newGameButton
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 20
+        Column {
+            id: buttonColumn
+            anchors.top: titleText.bottom
+            anchors.topMargin: 40
             anchors.horizontalCenter: parent.horizontalCenter
-            text: qsTr("New game")
-            onClicked: {
-                engine.setupGameboard()
-                rootItem.visible = false
+            spacing: 20
+
+            CheckBox {
+                id: picturesCheck
+                text: "Use pictures"
+                checked: engine.usePictures
+                onCheckedChanged: engine.usePictures = checked
+            }
+
+            MenuButton {
+                id: newGameButton
+//                anchors.top: buttonColumn.bottom
+//                anchors.topMargin: 10
+//                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("New game")
+                onClicked: {
+                    engine.setupGameboard()
+                    rootItem.visible = false
+                }
             }
         }
     }
