@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     app.setApplicationName("MemoryCards");
     qsrand(QDateTime::currentDateTime().toSecsSinceEpoch());
 
-    GameEngine::instance()->setupGameboard();
+    //GameEngine::instance()->setupGameboard();
 
     QQmlApplicationEngine engine;
 

@@ -28,8 +28,7 @@ GameEngine::GameEngine(QObject *parent) : QObject(parent)
     m_cardCount = 16;
     m_waiting = false;
     m_cardCount = 0;
-
-    setupGameboard();
+    m_gameReady = false;
 }
 
 int GameEngine::cardCount() const
@@ -53,6 +52,11 @@ void GameEngine::setMoves(int moves)
 bool GameEngine::waiting() const
 {
     return m_waiting;
+}
+
+bool GameEngine::gameReady() const
+{
+    return m_gameReady;
 }
 
 void GameEngine::setupGameboard()
@@ -103,6 +107,7 @@ void GameEngine::setupGameboard()
         m_cardList[m_pairList.at(i).second]= col;
     }
 
+    setGameReady(true);
     emit waitingChanged(m_waiting);
     QTimer::singleShot(0, this, SIGNAL(newGame()));
 }
@@ -145,6 +150,14 @@ void GameEngine::click(int index)
             emit waitingChanged(m_waiting);
             QTimer::singleShot(1000, this, SLOT(unflipCardsWithDelay()));
         }
+    }
+}
+
+void GameEngine::setGameReady(bool isReady)
+{
+    if(isReady != m_gameReady) {
+        m_gameReady = isReady;
+        emit gameReadyChanged();
     }
 }
 
