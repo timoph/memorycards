@@ -6,7 +6,7 @@ Window {
     id: appWindow
     width: 800
     height: 480
-    color: "#333"
+    color: "#000"
     visible: true
 
     Rectangle {
@@ -28,6 +28,7 @@ Window {
             spacing: 5
             width: parent.width
             height: parent.height
+            visible: engine.gameReady
 
             Repeater {
                 id: cardRepeater
@@ -50,13 +51,14 @@ Window {
         }
 
         Button {
-            id: restartButton
+            id: menuButton
             anchors.right: parent.right
             width: 50
             height: width
             text: "\u2699"
             font.pointSize: 40
-            onClicked: engine.setupGameboard()
+            visible: !gameMenu.visible
+            onClicked: gameMenu.visible = true
         }
 
         Rectangle {
@@ -83,6 +85,25 @@ Window {
                     bannerRect.visible = false
                 }
             }
+        }
+
+        Rectangle {
+            id: dimmerRect
+            anchors.fill: parent
+            color: "#000"
+            opacity: 0.8
+            visible: gameMenu.visible
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            enabled: gameMenu.visible
+            onClicked: gameMenu.visible = false
+        }
+
+        GameMenu {
+            id: gameMenu
+            visible: !engine.gameReady
         }
     }
 }
