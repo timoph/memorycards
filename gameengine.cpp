@@ -29,6 +29,7 @@ GameEngine::GameEngine(QObject *parent) : QObject(parent)
     m_waiting = false;
     m_cardCount = 0;
     m_gameReady = false;
+    m_usePictures = false;
 }
 
 int GameEngine::cardCount() const
@@ -57,6 +58,11 @@ bool GameEngine::waiting() const
 bool GameEngine::gameReady() const
 {
     return m_gameReady;
+}
+
+bool GameEngine::usePictures() const
+{
+    return m_usePictures;
 }
 
 void GameEngine::setupGameboard()
@@ -158,6 +164,14 @@ void GameEngine::setGameReady(bool isReady)
     if(isReady != m_gameReady) {
         m_gameReady = isReady;
         emit gameReadyChanged();
+    }
+}
+
+void GameEngine::setUsePictures(bool usePics)
+{
+    if(usePics != m_usePictures) {
+        m_usePictures = usePics;
+        emit usePicturesChanged();
     }
 }
 
