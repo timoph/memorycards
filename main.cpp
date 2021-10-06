@@ -25,8 +25,8 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    QScopedPointer<ImageProvider> imageProvider(new ImageProvider);
-    engine.addImageProvider("pics", imageProvider.data());
+    ImageProvider *imageProvider = new ImageProvider;
+    engine.addImageProvider("pics", imageProvider);
     engine.rootContext()->setContextProperty("engine", GameEngine::instance());
 
     engine.load(QUrl("qrc:/qml/MainView.qml"));
