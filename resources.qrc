@@ -13,5 +13,8 @@
         <file>qml/MainView.qml</file>
         <file>qml/GameMenu.qml</file>
         <file>qml/MenuButton.qml</file>
+        <file>qml/MenuRadioButton.qml</file>
+        <file>qml/Style.qml</file>
+        <file>qml/qmldir</file>
     </qresource>
 </RCC>
