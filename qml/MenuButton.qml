@@ -8,6 +8,9 @@ Item {
     implicitWidth: 160
 
     property string text: ""
+    property bool drawBorders: true
+    property bool transparentBackground: false
+    property int fontSize: 20
 
     signal clicked()
 
@@ -16,7 +19,7 @@ Item {
         height: base.height
         text: base.text
         anchors.fill: parent
-        font.pointSize: 20
+        font.pointSize: base.fontSize
 
         contentItem: Text {
             text: button.text
@@ -24,7 +27,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
             opacity: enabled ? 1.0 : 0.3
-            color: button.down ? "#f00" : "#fff"
+            color: button.down ? Style.highlightColor : Style.buttonTextColor
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             elide: Text.ElideRight
@@ -33,11 +36,11 @@ Item {
         background: Rectangle {
             implicitWidth: 60
             implicitHeight: 60
-            border.color: button.down ? "#f00" : "#fff"
-            border.width: 2
+            border.color: Style.buttonBorderColor
+            border.width: base.drawBorders ? 2 : 0
             radius: 15
-            opacity: 1
-            color: "#111"
+            color: Style.buttonColor
+            opacity: base.transparentBackground ? 0.2 : 1.0
         }
 
         onClicked: base.clicked()

@@ -1,12 +1,7 @@
 #include "imageprovider.h"
 #include "gameengine.h"
 
-ImageProvider::ImageProvider() :
-#ifdef QT5BUILD
-	QQuickImageProvider(QQuickImageProvider::Pixmap)
-#else
-	QDeclarativeImageProvider(QDeclarativeImageProvider::Pixmap)
-#endif
+ImageProvider::ImageProvider() : QQuickImageProvider(QQuickImageProvider::Pixmap)
 {
 
 }

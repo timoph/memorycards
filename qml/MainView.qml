@@ -1,18 +1,21 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Window 2.3
+import "."
 
 Window {
     id: appWindow
     width: 800
     height: 480
-    color: "#000"
+    color: Style.pageBgColor
     visible: true
+    minimumHeight: 220
+    minimumWidth: 410
 
     Rectangle {
         id: cardRect
         anchors.fill: parent
-        color: "#333"
+        color: Style.cardRectColor
         anchors.bottom: parent.bottom
 
         Connections {
@@ -50,41 +53,17 @@ Window {
             }
         }
 
-        Button {
+        MenuButton {
             id: menuButton
             anchors.right: parent.right
             width: 50
             height: width
             text: "\u2699"
-            font.pointSize: 40
+            drawBorders: false
+            transparentBackground: true
+            fontSize: 40
             visible: !gameMenu.visible
             onClicked: gameMenu.visible = true
-        }
-
-        Rectangle {
-            id: bannerRect
-            width: parent.width
-            height: parent.height / 4
-            color: "#455"
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
-            opacity: 50
-            visible: false
-
-            Text {
-                id: bannerText
-                anchors.centerIn: parent
-
-                text: "Game over"
-            }
-
-            MouseArea {
-                anchors.fill: parent
-
-                onClicked: {
-                    bannerRect.visible = false
-                }
-            }
         }
 
         Rectangle {
@@ -97,8 +76,31 @@ Window {
 
         MouseArea {
             anchors.fill: parent
-            enabled: gameMenu.visible
-            onClicked: gameMenu.visible = false
+            enabled: gameMenu.visible || bannerRect.visible
+            onClicked: {
+                gameMenu.visible = false
+                bannerRect.visible = false
+            }
+        }
+
+        Rectangle {
+            id: bannerRect
+            width: parent.width
+            height: parent.height / 4
+            border.width: 2
+            border.color: Style.menuBorderColor
+            color: Style.menuBgColor
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+            opacity: 50
+            visible: false
+
+            Text {
+                id: bannerText
+                anchors.centerIn: parent
+                color: Style.menuTextColor
+                text: "Game over in" + " " + engine.moves
+            }
         }
 
         GameMenu {

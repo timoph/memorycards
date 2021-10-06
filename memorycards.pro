@@ -3,13 +3,10 @@ TARGET = memorycards
 DEPENDPATH += .
 INCLUDEPATH += .
 
-greaterThan(QT_MAJOR_VERSION, 4) {
-        QT += core quick widgets
-        CONFIG -= app_bundle
-        DEFINES += QT5BUILD
-}
-else {
-        QT += declarative
+QT += core quick
+
+equals(QT_MAJOR_VERSION, 6) {
+    QT += quickcontrols2
 }
 
 # Input
