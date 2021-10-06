@@ -86,7 +86,7 @@ Window {
         Rectangle {
             id: bannerRect
             width: parent.width
-            height: parent.height / 4
+            height: parent.height / 3
             border.width: 2
             border.color: Style.menuBorderColor
             color: Style.menuBgColor
@@ -99,7 +99,8 @@ Window {
                 id: bannerText
                 anchors.centerIn: parent
                 color: Style.menuTextColor
-                text: "Game over in" + " " + engine.moves
+                font.pointSize: 22
+                text: "Game over in" + " " + engine.moves + " " + "moves"
             }
         }
 
