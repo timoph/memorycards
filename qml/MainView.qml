@@ -37,6 +37,23 @@ Window {
         color: Style.cardRectColor
         anchors.bottom: parent.bottom
 
+        Grid {
+            id: grid
+            width: parent.width
+            height: parent.width
+            columns: parent.width / (parent.width / 50)
+            Repeater {
+                model: grid.columns * grid.height / (grid.height / 50)
+
+                Rectangle {
+                    width: grid.width / 50
+                    height: width
+                    color: Style.pageBgColor
+                    radius: 45
+                }
+            }
+        }
+
         Connections {
             target: engine
             onGameWon: {
@@ -89,7 +106,7 @@ Window {
             id: dimmerRect
             anchors.fill: parent
             color: "#000"
-            opacity: 0.8
+            opacity: 0.7
             visible: gameMenu.visible
         }
 

@@ -30,5 +30,5 @@ Item {
     readonly property string buttonTextColor: "#FFFFFF"
     readonly property string menuTextColor: "#FFFFFF"
     readonly property string menuBorderColor: "#800080"
-    readonly property string cardRectColor: "#333333"
+    readonly property string cardRectColor: "#111111"
 }
