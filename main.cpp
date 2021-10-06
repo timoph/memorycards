@@ -40,7 +40,6 @@ int main(int argc, char *argv[])
     app.setOrganizationName("timoph");
     app.setOrganizationDomain("timoph.fi");
     app.setApplicationName("MemoryCards");
-    qsrand(QDateTime::currentDateTime().toSecsSinceEpoch());
 
     QQmlApplicationEngine engine;
 

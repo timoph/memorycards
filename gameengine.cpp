@@ -21,6 +21,7 @@
 
 #include <QColor>
 #include <QTimer>
+#include <QRandomGenerator>
 
 GameEngine *GameEngine::m_instance = 0;
 
@@ -113,8 +114,8 @@ void GameEngine::setupGameboard()
 
     int a, b;
     while(indexes.count() > 0) {
-        a = indexes.takeAt(qrand() % indexes.count());
-        b = indexes.takeAt(qrand() % indexes.count());
+        a = indexes.takeAt(QRandomGenerator::global()->bounded(indexes.count()));
+        b = indexes.takeAt(QRandomGenerator::global()->bounded(indexes.count()));
 
         m_pairList.append(QPair<int,int>(a, b));
     }
@@ -127,7 +128,7 @@ void GameEngine::setupGameboard()
     int count = colorPool.count();
 
     for(int i = 0; i < count; i++) {
-        QString col = colorPool.takeAt(qrand() % colorPool.count());
+        QString col = colorPool.takeAt(QRandomGenerator::global()->bounded(colorPool.count()));
         m_cardList[m_pairList.at(i).first] = col;
         m_cardList[m_pairList.at(i).second]= col;
     }
