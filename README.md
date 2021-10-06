@@ -1,4 +1,4 @@
 # memorycards
-a memory card game
+a simple memory card game
 
-very much work in progress.
+Tested to build and run with Qt 5.12 and 5.15
