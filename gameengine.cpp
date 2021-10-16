@@ -49,7 +49,7 @@ GameEngine::GameEngine(QObject *parent) : QObject(parent)
     m_waiting = false;
     m_cardCount = 0;
     m_gameReady = false;
-    m_usePictures = false;
+    m_usePictures = true;
 }
 
 int GameEngine::cardCount() const
