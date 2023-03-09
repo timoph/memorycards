@@ -31,7 +31,7 @@ Item {
 
     Connections {
         target: engine
-        onNewGame: {
+        function onNewGame() {
             cardImage.state = "unflipped"
         }
     }

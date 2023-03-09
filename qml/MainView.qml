@@ -56,7 +56,7 @@ Window {
 
         Connections {
             target: engine
-            onGameWon: {
+            function onGameWon() {
                 bannerRect.visible = true
             }
         }
@@ -79,7 +79,7 @@ Window {
 
                     Connections {
                         target: engine
-                        onUnflipCard: {
+                        function onUnflipCard(cardIndex) {
                             if(cardIndex === index) {
                                 setState("unflipped")
                             }
