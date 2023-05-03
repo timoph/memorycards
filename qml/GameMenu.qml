@@ -24,7 +24,7 @@ import "."
 Item {
     id: rootItem
     implicitWidth: 380
-    implicitHeight: 190
+    implicitHeight: 270
     visible: false
     anchors.centerIn: parent
 
@@ -77,6 +77,15 @@ Item {
                 onClicked: {
                     engine.setupGameboard()
                     rootItem.visible = false
+                }
+            }
+
+            MenuButton {
+                id: quitButton
+                text: qsTr("Quit")
+                width: rootItem.width - rootItem.width / 5
+                onClicked: {
+                    Qt.quit()
                 }
             }
         }
