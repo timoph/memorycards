@@ -1,4 +1,9 @@
 # memorycards
 a simple memory card game
 
-Tested to build and run with Qt 5.12 and 5.15
+Build with CMake:
+
+cmake -S . -B build
+cmake --build build
+
+The project supports Qt 5.12+ and Qt 6.
