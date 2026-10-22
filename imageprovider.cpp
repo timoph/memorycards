@@ -20,6 +20,8 @@
 #include "imageprovider.h"
 #include "gameengine.h"
 
+#include <QDebug>
+
 ImageProvider::ImageProvider() : QQuickImageProvider(QQuickImageProvider::Pixmap)
 {
 
@@ -38,7 +40,16 @@ QPixmap ImageProvider::requestPixmap(const QString &id, QSize *size, const QSize
         pixmap.load("://pics/back.png");
     }
     else {
-        QString colorName = GameEngine::instance()->cardList().at(id.toInt());
+        const int colorIndex = id.toInt();
+        const QList<QString> cardColors = GameEngine::instance()->cardList();
+        if(colorIndex < 0 || colorIndex >= cardColors.count()) {
+            qWarning() << "Invalid card image index requested:" << colorIndex
+                       << "card list size:" << cardColors.count();
+            pixmap.load("://pics/back.png");
+            return pixmap;
+        }
+
+        QString colorName = cardColors.at(colorIndex);
         if(GameEngine::instance()->usePictures()) {
             pixmap.load(QString("://pics/%1.png").arg(colorName));
         }
@@ -53,4 +64,3 @@ QList<QString> ImageProvider::cardColors() const
 {
     return GameEngine::instance()->cardList();
 }
-

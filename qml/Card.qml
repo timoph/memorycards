@@ -23,34 +23,117 @@ Item {
     id: card
     implicitWidth: 80
     implicitHeight: 100
-    //color: "green"
+    property bool flipped: false
+    property bool showingFront: false
+    property bool targetFlipped: false
 
     function setState(stateName) {
-        cardImage.state = stateName
+        setFlipped(stateName === "flipped", true)
+    }
+
+    function setFlipped(shouldBeFlipped, animate) {
+        targetFlipped = shouldBeFlipped
+        flipped = shouldBeFlipped
+
+        if (!animate) {
+            flipAnimation.stop()
+            cardRotation.angle = 0
+            showingFront = shouldBeFlipped
+            return
+        }
+
+        if (flipAnimation.running) {
+            flipAnimation.stop()
+        }
+
+        if (showingFront === shouldBeFlipped) {
+            cardRotation.angle = 0
+            return
+        }
+
+        flipAnimation.start()
     }
 
     Connections {
         target: engine
         function onNewGame() {
-            cardImage.state = "unflipped"
+            setFlipped(false, false)
         }
     }
 
-    Image {
-        id: cardImage
+    Rectangle {
+        id: cardShadow
         anchors.fill: parent
-        state: "unflipped"
-        cache: false
-        source: state == "flipped" ? "image://pics/" + index : "image://pics/99"
+        anchors.topMargin: 3
+        anchors.leftMargin: 2
+        anchors.rightMargin: -2
+        anchors.bottomMargin: -3
+        radius: 6
+        color: "#000000"
+        opacity: 0.10 + (Math.abs(cardRotation.angle) / 90) * 0.20
+        z: -1
+    }
+
+    Item {
+        id: cardBody
+        anchors.fill: parent
+        transform: Rotation {
+            id: cardRotation
+            origin.x: cardBody.width / 2
+            origin.y: cardBody.height / 2
+            axis.x: 0
+            axis.y: 1
+            axis.z: 0
+            angle: 0
+        }
+
+        Image {
+            id: backImage
+            anchors.fill: parent
+            cache: false
+            visible: !showingFront
+            source: "image://pics/99"
+        }
+
+        Image {
+            id: frontImage
+            anchors.fill: parent
+            cache: false
+            visible: showingFront
+            source: showingFront ? "image://pics/" + index : ""
+        }
+    }
+
+    SequentialAnimation {
+        id: flipAnimation
+        NumberAnimation {
+            target: cardRotation
+            property: "angle"
+            from: 0
+            to: 90
+            duration: 180
+            easing.type: Easing.InOutCubic
+        }
+        ScriptAction {
+            script: showingFront = targetFlipped
+        }
+        NumberAnimation {
+            target: cardRotation
+            property: "angle"
+            from: -90
+            to: 0
+            duration: 180
+            easing.type: Easing.InOutCubic
+        }
     }
 
     MouseArea {
         id: clickpad
         anchors.fill: parent
-        enabled: cardImage.state != "flipped" && !engine.waiting
+        enabled: !flipped && !engine.waiting && !flipAnimation.running
 
         onClicked: {
-            cardImage.state = "flipped"
+            setFlipped(true, true)
             engine.click(index)
         }
     }
